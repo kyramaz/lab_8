@@ -1,70 +1,10 @@
 #include <iostream>
 using namespace std;
 
-int main()
+void First_Sort(int n, int* mas, int* mas_sum, int* mas_numeral)
 {
-    setlocale(LC_ALL, "Russian");
-
-    // 1st
-    /*int mas[10000];
-    int n;
-    int element;
-    bool result = false;
-
-    cout << "введите длину последовательности."<< endl;
-    cin >> n;
-    
-    for (int i = 0; i < n; i++) 
-    {
-        cout << "введите " << i+1 << " элемент последовательности." << endl;
-        cin >> mas[i];
-    }
-    for (int i = 0; i < n; i++)
-    {
-        element = mas[i];
-        while (element > 9) 
-        {
-            element /= 10;
-        }
-        if (element == 1) 
-        {
-            result = true;
-            break;
-        }
-    }
-    if (result = true) {
-        for (int i = 0; i < n-1; i++){
-            for (int j = i + 1; j < n; j++) {
-                if (mas[i] > mas[j]) {
-                    swap(mas[i], mas[j]);
-                }
-            }
-        }
-    }
-    else {
-        cout << "ни одно число не подошло по условию." << endl;
-    }
-    for (int i = 0; i < n; i++) {
-        cout << mas[i] << " ";
-    }*/
-
-
-    // 2nd
-    /*int n;
-    int element;
-    int sum{0};
-    int mas[1000];
-    int mas_sum[1000];
-    int mas_numeral[1000];
-    
-    cout << "Введите длину последовательности натуральных чисел" << endl;
-    cin >> n;
-
-    for (int i = 0; i < n; i++) 
-    {
-        cout << "Введите " << i + 1 << " элемент последовательности" << endl;
-        cin >> mas[i];
-    }
+    int element{};
+    int sum{};
 
     for (int i = 0; i < n; i++)
     {
@@ -81,9 +21,9 @@ int main()
         mas_sum[i] = sum;
     }
 
-    for (int i = 0; i < n - 1; i++) 
+    for (int i = 0; i < n - 1; i++)
     {
-        for (int j = i + 1; j < n; j++) 
+        for (int j = i + 1; j < n; j++)
         {
             if (mas_numeral[i] > mas_numeral[j])
             {
@@ -123,31 +63,18 @@ int main()
             }
         }
     }
+}
 
-    for (int i = 0; i < n; i++) 
-    {
-        cout << mas[i] << " ";
-    }*/
-
-    // 3rd
-    int mas[100][100];
-    int minimum = 999999;
-    int lines;
-    int columns;
-    int sum_lines = 0;
-    int mas_sum[100];
+void Second_Sort(int lines, int columns, int** mas, int* mas_sum)
+{
     int need_line{};
-    
-    cout << "Введите количество строк матрицы" << endl;
-    cin >> lines;
-    cout << "Введите количество столбцов матрицы" << endl;
-    cin >> columns;
-    
+    int sum_lines{};
+    int minimum = INT_MAX;
+
     for (int i = 0; i < lines; i++)
     {
         for (int j = 0; j < columns; j++)
         {
-            cout << "Введите элемент " << i+1 << " строки " << j+1 << " столбца." << endl;
             cin >> (mas[i][j]);
         }
     }
@@ -180,6 +107,86 @@ int main()
         for (int j = 0; j < columns; j++)
         {
             cout << mas[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+
+    // 2nd
+    /*
+    int n{};
+    cout << "Введите количество элементов последовательности" << endl;
+    cin >> n;
+
+    int* mas = new int[n];
+    int* mas_numeral = new int[n];
+    int* mas_sum = new int[n];
+
+    cout << "Введите элементы последовательности" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> mas[i];
+    }
+
+    First_Sort(n, mas, mas_sum, mas_numeral);
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << mas[i] << " ";
+    }
+    cout << endl;
+
+    int nn{};
+    cout << "add nn" << endl;
+    cin >> nn;
+    mas = (int*)realloc(mas, nn * sizeof(int));
+    mas_sum = (int*)realloc(mas_sum, nn * sizeof(int));
+    mas_numeral = (int*)realloc(mas_numeral, nn * sizeof(int));
+
+    cout << "add elements" << endl;
+    for (int i = n; i < nn; i++)
+    {
+        cin >> mas[i];
+    }
+    
+    First_Sort(nn, mas, mas_sum, mas_numeral);
+    for (int i = 0; i < nn; i++)
+    {
+        cout << mas[i] << " ";
+    }
+    for (int i = 0; i < nn; i++)
+    {
+        delete[] mas[i];
+        delete[] mas_sum[i];
+        delete[] mas_numeral[i];
+    }
+    delete[] mas; delete[] mas_sum; delete[] mas_numeral;
+    */
+
+    // 3rd
+    int lines, columns;
+    cout << "Введите количество строк матрицы" << endl;
+    cin >> lines;
+    cout << "Введите количество столбцов матрицы" << endl;
+    cin >> columns;
+    
+    int** matrix = new int* [lines];
+    for (int i = 0; i < lines; i++)
+    {
+        matrix[i] = new int[columns];
+    }
+    int* mas_sum = new int[lines];
+
+    Second_Sort(lines, columns, matrix, mas_sum);
+    for (int i = 0; i < lines; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            cout << matrix[i][j] << " ";
         }
         cout << endl;
     }

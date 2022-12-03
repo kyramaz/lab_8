@@ -101,15 +101,6 @@ void Second_Sort(int lines, int columns, int** mas, int* mas_sum)
     {
         mas[need_line][j] = 0;
     }
-
-    for (int i = 0; i < lines; i++)
-    {
-        for (int j = 0; j < columns; j++)
-        {
-            cout << mas[i][j] << " ";
-        }
-        cout << endl;
-    }
 }
 
 int main()
@@ -168,23 +159,24 @@ int main()
     */
 
     // 3rd
-    int lines, columns;
+    int* lines = new int;
+    int* columns = new int;
     cout << "Введите количество строк матрицы" << endl;
-    cin >> lines;
+    cin >> *lines;
     cout << "Введите количество столбцов матрицы" << endl;
-    cin >> columns;
+    cin >> *columns;
     
-    int** matrix = new int* [lines];
-    for (int i = 0; i < lines; i++)
+    int** matrix = new int* [*lines];
+    for (int i = 0; i < *lines; i++)
     {
-        matrix[i] = new int[columns];
+        matrix[i] = new int[*columns];
     }
-    int* mas_sum = new int[lines];
+    int* mas_sum = new int[*lines];
 
-    Second_Sort(lines, columns, matrix, mas_sum);
-    for (int i = 0; i < lines; i++)
+    Second_Sort(*lines, *columns, matrix, mas_sum);
+    for (int i = 0; i < *lines; i++)
     {
-        for (int j = 0; j < columns; j++)
+        for (int j = 0; j < *columns; j++)
         {
             cout << matrix[i][j] << " ";
         }
